@@ -1,0 +1,4 @@
+- Was ist Numerik
+- Numerische Verfahren umsetzen
+- Numerische Integration
+- Numerische Differentiation

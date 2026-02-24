@@ -1,0 +1,171 @@
+## Interpolation
+
+```{python}
+#| echo: false
+import copy
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+import seaborn as sns
+```
+
+Bei der Bildung der Ober- und Untersumme wurde die zu integrierende Funktion durch einen konstanten Wert in den Teilintervallen zwischen den Stützstellen angenähert. Eine genauere Berechnung des Integrals kann durch eine bessere Interpolation erfolgen. Dazu eignen sich  Polynome, da diese leicht zu Integrieren sind.   
+
+### Trapezregel
+
+Die Trapezregel beruht auf der Annäherung der zu integrierenden Funktion durch Geraden, d.h. Polynome vom Grad 1, auf den Teilintervallen. Die Approximation des Integralwertes ergibt sich entsprechend aus den Flächeninhalten der so entstandenen Trapeze.
+
+Wie im vorhergehenden Kapitel wird das Verfahren anhand folgender Funktion demonstriert
+
+$$ \mathsf{I = \int_0^2\sin(3x) + 2x \ dx} $$
+
+```{python}
+def fkt(x):
+    return np.sin(3*x) + 2*x
+
+# Daten für die Visualisierung
+x = np.linspace(0, 2, 100)
+y = fkt(x)
+
+# Exakte Lösung
+I_exakt = (-1/3*np.cos(3*2) + 2**2) - (-1/3)
+```
+
+Bildung der Stützpunkte:
+
+```{python}
+n = 5
+
+xi = np.linspace(0, 2, n)
+yi = fkt(xi)
+```
+
+Zunächst erfolgt noch die Visualisierung des Verfahrens.
+
+```{python}
+plt.plot(x, y, label='Funktion')
+plt.scatter(xi, yi, label='Stützstellen', c='C3')
+plt.plot(xi, yi, label='Approximation', c='C1')
+
+plt.vlines(xi, ymin=0, ymax=yi, color='C1', alpha=0.3)
+
+plt.grid()
+plt.legend();
+```
+
+Die Integration selbst kann mittels der [Funktion `scipy.integrate.trapezoid`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.trapezoid.html#scipy.integrate.trapezoid) ausgeführt werden.
+
+```{python}
+res = scipy.integrate.trapezoid(yi, xi)
+print(f"Integralwert mit {n} Stützstellen: {res:.4f}")
+```
+
+Der so ermittelte Wert nähert sich dem exakten Wert mit zunehmender Anzahl der Stützstellen.
+
+```{python}
+n_max = 50
+ns = np.arange(2, n_max, 1, dtype=int)
+tr = np.zeros(len(ns))
+
+for i, n in enumerate(ns):
+    xi = np.linspace(0, 2, n)
+    yi = fkt(xi)
+    tr[i] = scipy.integrate.trapezoid(yi, xi)
+```
+
+```{python}
+plt.plot(ns, tr)
+plt.axhline(y=I_exakt, color='C3', alpha=0.3)
+
+plt.xlabel('Anzahl der Stützstellen n')
+plt.ylabel('Integralwert')
+
+plt.grid();
+```
+
+```{python}
+plt.plot(ns, np.abs(tr-I_exakt))
+
+plt.xlabel('Anzahl der Stützstellen n')
+plt.ylabel('Differenz zum exakten Wert')
+
+# plt.xscale('log')
+plt.yscale('log')
+
+plt.grid();
+```
+
+### Simpsonregel
+
+Die Verwendung eines Polynoms vom zweiten Grad führt zur Simpsonregel. 
+Hierzu wird die Funktion an einem Zwischenwert, mittig im Teilintervall, 
+ausgewertet und zusammen mit den Werten an den Stützstellen zur Bestimmung der 
+Polynomkoeffizienten verwendet.
+
+Anhand des obigen Beispiels wird die Simpsonregel visuell demonstriert.
+
+```{python}
+n = 5
+
+xi = np.linspace(0, 2, n)
+yi = fkt(xi)
+```
+
+```{python}
+plt.plot(x, y, label='Funktion')
+plt.scatter(xi, yi, label='Stützstellen', c='C3')
+
+# Bestimmung und Plotten der Polynome
+for i in range(n-1):
+    dx = xi[i+1] - xi[i]
+    cx = (xi[i] + xi[i+1]) / 2
+    cy = fkt(cx)
+
+    P = np.polyfit([xi[i], cx, xi[i+1]], [yi[i], cy, yi[i+1]], 2)
+    
+    Px = np.linspace(xi[i], xi[i+1], 20)
+    Py = np.polyval(P, Px)
+    
+    label=None
+    if i==0: 
+        label='Approximation'
+    
+    plt.plot(Px, Py, color='C1', label=label)
+
+plt.vlines(xi, ymin=0, ymax=yi, color='C1', alpha=0.3)
+
+plt.grid()
+plt.legend();
+```
+
+Die Simpsonregel ist bereits in der [Funktion `scipy.integrate.simpson`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.simpson.html#scipy.integrate.simpson) implementiert. Im Folgenden wird nur die Differenz zur Trapezregel demonstriert.
+
+```{python}
+n_max = 50
+ns = np.arange(3, n_max, 2, dtype=int)
+si = np.zeros(len(ns))
+tr = np.zeros(len(ns))
+
+for i, n in enumerate(ns):
+    xi = np.linspace(0, 2, n)
+    yi = fkt(xi)
+    si[i] = scipy.integrate.simpson(yi, xi)
+    tr[i] = scipy.integrate.trapezoid(yi, xi)
+```
+
+```{python}
+#| tags: []
+plt.plot(ns, np.abs(tr-I_exakt), label='Trapezregel')
+plt.plot(ns, np.abs(si-I_exakt), label='Simpsonregel')
+
+plt.xlabel('Anzahl der Stützstellen n')
+plt.ylabel('Differenz zum exakten Wert')
+
+# plt.xscale('log')
+plt.yscale('log')
+
+plt.legend()
+plt.grid();
+```
+
+

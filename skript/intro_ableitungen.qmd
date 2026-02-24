@@ -1,0 +1,13 @@
+## Differentiation
+
+Die numerische Bestimmung von Ableitungen wird hier anhand von zwei Ansätzen demonstriert. Zum Einen als Differenzenquotienten und zum Anderen über das Polynomfitting. Angewendet werden diese Verfahren z.B. beim Suchen von Extrema in Experimental- oder Simulationsdaten, beim Lösen von Differentialgleichungen oder bei Optimierungsverfahren. 
+
+Obwohl die analytische Bildung einer Ableitung oft viel einfacher ist als die Integration, ist dies in den oben genannten Fällen nicht direkt möglich. Gesucht ist hierbei immer die Ableitung $\mathsf{f'(x)}$ einer Funktion $\mathsf{f(x)}$ oder einer diskreten Punktmenge $\mathsf{(x_i, y_i)}$ an einer bestimmten Stelle $\mathsf{x=x_0}$ oder auf einem Intervall.  
+
+Die Grundidee bei den hier vorgestellten Differenzenquotienten bzw. Differenzenformeln ist die Annäherung der abzuleitenden Funktion mit einer Taylor-Entwicklung an mehreren Stellen. Damit kann nach der gesuchte Ableitung an der entsprechenden Entwicklungsstelle aufgelöst werden.  
+
+{{< include taylor.qmd >}}
+
+{{< include differenzenquotienten.qmd >}}
+
+{{< include konvergenz.qmd >}}

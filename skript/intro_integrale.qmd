@@ -1,0 +1,21 @@
+## Integration
+
+Die Bildung von Integralen findet beispielsweise bei der Bestimmung von Flächeninhalten oder von Gesamtkräften Anwendung. Formal wird das bestimmte Integral $\mathsf{I}$ der Funktion $\mathsf{f(x)}$ auf dem Intervall $\mathsf{x \in [a,b]}$ wie folgt dargestellt.
+
+$$ \mathsf{I = \int_a^b f(x)\ dx} $$
+
+Im Allgemeinen kann das Integral nicht analytisch gelöst werden, da die Stammfunktion $\mathsf{F(x)}$ nicht leicht zu bestimmen ist. In solchen Fällen können numersiche Verfahren eingesetzt werden um den Integralwert zu approximieren. Die numerische Integration wird oft auch als numersiche Quadratur bezeichnet.
+
+Dieses Kapitel bietet eine kurze Übersicht von numerischen Integrationsmethoden: 
+
+* Ober- und Untersumme
+* Quadratur
+* Monte-Carlo
+
+{{< include oberuntersumme.qmd >}}
+
+{{< include interpolation.qmd >}}
+
+{{< include montecarlo.qmd >}}
+
+

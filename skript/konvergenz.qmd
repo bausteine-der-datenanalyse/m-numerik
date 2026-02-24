@@ -1,0 +1,158 @@
+## Fehlerbetrachtung
+
+```{python}
+#| echo: false
+import copy
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy
+import seaborn as sns
+```
+
+In diesem Abschnitt werden die Approximationsfehler, d.h. Fehler aus der 
+Differenzenformeln, und Rundungsfehler, d.h. Fehler durch die endliche 
+Genauigkeit der digitalen Darstellung von Zahlen, betrachtet.
+
+### Approximationsfehler
+
+Die Ordnung des Verfahrens kann durch die Betrachtung des Fehlers, hier zum 
+bekannten exakten Wert, bestimmt werden. Dazu wird die Schrittweite 
+kontinuierlich verkleinert. 
+
+```{python}
+#| code-fold: true
+#| tags: [hide-input]
+def fkt(x):
+    return np.sin(3*x) + 2*x
+
+# Daten für die Visualisierung
+x = np.linspace(0, 2, 100)
+y = fkt(x)
+
+# Exakte Lösung bei x=1
+fp_exakt = 3*np.cos(3*0.85) + 2
+```
+
+```{python}
+#| code-fold: true
+#| tags: [hide-input]
+x0 = 0.85
+
+hs = []
+fpfs = []
+fpcs = []
+
+
+h0 = 1
+for i in range(18):
+    h = h0 / 2**i
+
+    f0 = fkt(x0)
+    fnh = fkt(x0 - h)
+    fph = fkt(x0 + h)
+
+    fpf = (fph - f0) / h
+    fpc = (fph - fnh) / (2*h)
+    
+    hs.append(h)
+    fpfs.append(fpf)
+    fpcs.append(fpc)
+```
+
+```{python}
+#| code-fold: true
+#| tags: [hide-input]
+plt.plot(hs, np.abs(fpfs - fp_exakt), label='vorwärts')
+plt.plot(hs, np.abs(fpcs - fp_exakt), label='zentral')
+
+plt.plot([1e-5, 1e-1], [1e-5, 1e-1], '--', color='grey', label='Hilfslinien')
+plt.plot([1e-5, 1e-1], [1e-10, 1e-2], '--', color='grey')
+
+plt.xlabel('Schrittweite h')
+plt.ylabel('Fehler')
+
+plt.xscale('log')
+plt.yscale('log')
+
+plt.legend()
+plt.grid();
+```
+
+In der logiarithmischen Darstellung beider Achsen werden Potenzfunktionen zu 
+Graden mit dem Potenzgrad als Steigung. Das bedeutet, dass der Fehler im obigen 
+Plot sich wie eine Potenzfunktion mit dem Grad eins bzw. zwei verhält. Die 
+eingezeichneten Hilfslinien haben eine Steigung von eins bzw. zwei. Dies 
+entspricht auch der Ordnung $\mathsf{\mathcal{O}(h)}$ bzw. $\mathsf{\mathcal{O}(h^2)}$ 
+aus der Differenzenformel.
+
+### Rundungsfehler
+
+Wird nun die Schrittweiter noch weiter verkleinert, wirkt sich die Genauigkeit 
+der Darstellung von Zahlen bzw. Rundungsfehler auf die Approximation aus.
+
+```{python}
+#| code-fold: true
+#| tags: [hide-input]
+x0 = 0.85
+
+hs = []
+fpfs = []
+fpcs = []
+
+
+h0 = 1
+for i in range(35):
+    h = h0 / 2**i
+
+    f0 = fkt(x0)
+    fnh = fkt(x0 - h)
+    fph = fkt(x0 + h)
+
+    fpf = (fph - f0) / h
+    fpc = (fph - fnh) / (2*h)
+    
+    hs.append(h)
+    fpfs.append(fpf)
+    fpcs.append(fpc)
+```
+
+```{python}
+#| code-fold: true
+#| tags: [hide-input]
+plt.plot(hs, np.abs(fpfs - fp_exakt), label='vorwärts')
+plt.plot(hs, np.abs(fpcs - fp_exakt), label='zentral')
+
+plt.plot([1e-5, 1e-1], [1e-5, 1e-1], '--', color='grey', label='Hilfslinien')
+plt.plot([1e-5, 1e-1], [1e-10, 1e-2], '--', color='grey')
+
+plt.xlabel('Schrittweite h')
+plt.ylabel('Fehler')
+
+plt.xscale('log')
+plt.yscale('log')
+
+plt.legend()
+plt.grid();
+```
+
+Wie bereits vorgestellt, können 64-Bit-Zahlen nur mit einer Genauigkeit von 
+etwa $\mathsf{\epsilon\approx10^{-16}}$ dargestellt werden. Das bedeutet, 
+dass z.B. die Differenz von zwei Zahlen nicht genauer als $\mathsf{\epsilon}$ 
+berechnet werden kann. Dies ist der sogenannte Rundungsfehler.
+
+Im konkreten Fall der Vorwärtsdifferenzenformel bedeutet dies:
+
+$$ \mathsf{f'(x_0) = \frac{f(x_0 + h) - f(x_0)}{h} + \mathcal{O}(h)} $$
+$$\mathsf{\overset{Rundungsfehler}{\Rightarrow} \frac{f(x_0 + h) - f(x_0) + \mathcal{O}(\epsilon)}{h} + \mathcal{O}(h)} $$
+$$ \mathsf{= \frac{f(x_0 + h) - f(x_0)}{h} + \mathcal{O}\left(\frac{\epsilon}{h}\right) + \mathcal{O}(h)} $$
+
+Damit macht eine Verkleinerung von $\mathsf{h}$ nur Sinn, solange der Rundungsfehler 
+klein gegenüber $\mathsf{h}$ ist. Genauer:
+
+$$\mathsf{\frac{\epsilon}{h} \le h }$$
+$$\mathsf{\Rightarrow \quad h \ge \sqrt{\epsilon}} $$
+
+Mit $\mathsf{\epsilon \approx 10^{-16}}$ ist für diese Differenzenformel ein 
+$\mathsf{h}$ nur bis etwa $\mathsf{10^{-8}}$ angemessen.
+
+
