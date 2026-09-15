@@ -78,7 +78,7 @@ plt.legend()
 plt.grid();
 ```
 
-In der logiarithmischen Darstellung beider Achsen werden Potenzfunktionen zu 
+In der logarithmischen Darstellung beider Achsen werden Potenzfunktionen zu
 Graden mit dem Potenzgrad als Steigung. Das bedeutet, dass der Fehler im obigen 
 Plot sich wie eine Potenzfunktion mit dem Grad eins bzw. zwei verhält. Die 
 eingezeichneten Hilfslinien haben eine Steigung von eins bzw. zwei. Dies 
@@ -87,7 +87,7 @@ aus der Differenzenformel.
 
 ### Rundungsfehler
 
-Wird nun die Schrittweiter noch weiter verkleinert, wirkt sich die Genauigkeit 
+Wird nun die Schrittweite noch weiter verkleinert, wirkt sich die Genauigkeit
 der Darstellung von Zahlen bzw. Rundungsfehler auf die Approximation aus.
 
 ```{python}
