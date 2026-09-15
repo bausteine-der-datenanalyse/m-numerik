@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -77,10 +80,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a936e90c91f47a61ff5a0150d04a60e7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3a79c8b4f024afbc6085355c069670f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -259,7 +262,7 @@ window.Quarto = {
 
 <p>Die Bildung von Integralen findet beispielsweise bei der Bestimmung von Flächeninhalten oder von Gesamtkräften Anwendung. Formal wird das bestimmte Integral <span class="math inline">\(\mathsf{I}\)</span> der Funktion <span class="math inline">\(\mathsf{f(x)}\)</span> auf dem Intervall <span class="math inline">\(\mathsf{x \in [a,b]}\)</span> wie folgt dargestellt.</p>
 <p><span class="math display">\[ \mathsf{I = \int_a^b f(x)\ dx} \]</span></p>
-<p>Im Allgemeinen kann das Integral nicht analytisch gelöst werden, da die Stammfunktion <span class="math inline">\(\mathsf{F(x)}\)</span> nicht leicht zu bestimmen ist. In solchen Fällen können numersiche Verfahren eingesetzt werden um den Integralwert zu approximieren. Die numerische Integration wird oft auch als numersiche Quadratur bezeichnet.</p>
+<p>Im Allgemeinen kann das Integral nicht analytisch gelöst werden, da die Stammfunktion <span class="math inline">\(\mathsf{F(x)}\)</span> nicht leicht zu bestimmen ist. In solchen Fällen können numerische Verfahren eingesetzt werden um den Integralwert zu approximieren. Die numerische Integration wird oft auch als numerische Quadratur bezeichnet.</p>
 <p>Dieses Kapitel bietet eine kurze Übersicht von numerischen Integrationsmethoden:</p>
 <ul>
 <li>Ober- und Untersumme</li>
@@ -268,7 +271,7 @@ window.Quarto = {
 </ul>
 <section id="ober--und-untersumme" class="level3" data-number="2.0.1">
 <h3 data-number="2.0.1" class="anchored" data-anchor-id="ober--und-untersumme"><span class="header-section-number">2.0.1</span> Ober- und Untersumme</h3>
-<div id="52ddf9ea" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="1">
+<div id="08f64065" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -288,7 +291,7 @@ window.Quarto = {
 <h2 data-number="2.2" class="anchored" data-anchor-id="beispiel"><span class="header-section-number">2.2</span> Beispiel</h2>
 <p>Beispielhaft soll folgendes Integral bestimmt werden</p>
 <p><span class="math display">\[ \mathsf{I = \int_0^2\sin(3x) + 2x \ dx} \]</span></p>
-<div id="d2ffddc7" class="cell" data-execution_count="2">
+<div id="4f916a53" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fkt(x):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(<span class="dv">3</span><span class="op">*</span>x) <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -300,14 +303,14 @@ window.Quarto = {
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>I_exakt <span class="op">=</span> (<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>np.cos(<span class="dv">3</span><span class="op">*</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> (<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Als erstes werden die Stützstellen gleichmäßig im Intervall <span class="math inline">\(\mathsf{[0,2]}\)</span> verteilt.</p>
-<div id="37feee0c" class="cell" data-execution_count="3">
+<div id="5956ef4b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xi <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span>, n)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>yi <span class="op">=</span> fkt(xi)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Die beiden Summen benötigen die Extremwerte der zu integrierenden Funktion in den Teilintervallen. Diese werden mit Hilfe einer Funktionsauswertung auf dem Teilintervall bestimmt. Für die nachfolgende Visualisierung hat die Menge der Summen ebenfalls <span class="math inline">\(\mathsf{n}\)</span> Elemente.</p>
-<div id="a578c755" class="cell" data-execution_count="4">
+<div id="f68e01e8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>oben <span class="op">=</span> np.zeros(n)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>unten <span class="op">=</span> np.zeros(n)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -318,12 +321,12 @@ window.Quarto = {
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    unten[i<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> np.<span class="bu">min</span>(cy)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Die ersten Elemente der beiden Summenlisten werden auf die ersten Funktionswerte gesetzt, dies dient nur der folgenden Darstellung.</p>
-<div id="21832bfc" class="cell" data-execution_count="5">
+<div id="6c260e34" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>oben[<span class="dv">0</span>] <span class="op">=</span> yi[<span class="dv">0</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>unten[<span class="dv">0</span>] <span class="op">=</span> yi[<span class="dv">0</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Visualisierung der einzelnen Funktionen.</p>
-<div id="e6bd61ff" class="cell" data-execution_count="6">
+<div id="4c13d781" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, label<span class="op">=</span><span class="st">'Funktion'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(xi, yi, label<span class="op">=</span><span class="st">'Stützstellen'</span>, c<span class="op">=</span><span class="st">'C3'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.plot(xi, oben, drawstyle<span class="op">=</span><span class="st">'steps-pre'</span>, label<span class="op">=</span><span class="st">'Obersumme'</span>)</span>
@@ -340,13 +343,13 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-7-output-1.png" width="590" height="430" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Das obige Verfahren kann nun in einer Funktion zusammengefasst werden, welche die Summen der beiden Folgen zurückgibt.</p>
-<div id="6bc54baa" class="cell" data-execution_count="7">
+<div id="d4410e61" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ou_summe(n, a<span class="op">=</span><span class="dv">0</span>, b<span class="op">=</span><span class="dv">2</span>):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    xi <span class="op">=</span> np.linspace(a, b, n)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    yi <span class="op">=</span> fkt(xi)</span>
@@ -366,7 +369,7 @@ window.Quarto = {
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sum_oben, sum_unten</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Für eine systematische Untersuchung des Konvergenzverhaltens, wird die Integrationsfunktion für verschiedene Anzahlen von Stützstellen aufgerufen.</p>
-<div id="a7677452" class="cell" data-execution_count="8">
+<div id="a0949c3e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n_max <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ns <span class="op">=</span> np.arange(<span class="dv">2</span>, n_max, <span class="dv">1</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>os <span class="op">=</span> np.zeros(<span class="bu">len</span>(ns))</span>
@@ -379,7 +382,7 @@ window.Quarto = {
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    us[i] <span class="op">=</span> u</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Die graphische Darstellung der beiden Summen zeigt eine kontinuierliche Annäherung dieser.</p>
-<div id="cebda6b3" class="cell" data-execution_count="9">
+<div id="34a38b8a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, os, label<span class="op">=</span><span class="st">'Obersumme'</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, us, label<span class="op">=</span><span class="st">'Untersumme'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -393,13 +396,13 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-10-output-1.png" width="577" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Dies wird insbesondere deutlich, wenn die Differenz der beiden Summen aufgetragen wird. Mit einer logarithmischen Darstellung kann die kontinuierliche Annäherung auch quantitativ abgelesen werden.</p>
-<div id="6d549d3c" class="cell" data-tags="[]" data-execution_count="10">
+<div id="33298a6d" class="cell" data-tags="[]" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, os<span class="op">-</span>us)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Anzahl der Stützstellen n'</span>)</span>
@@ -412,7 +415,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-11-output-1.png" width="600" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -426,7 +429,7 @@ window.Quarto = {
 <p>Die Trapezregel beruht auf der Annäherung der zu integrierenden Funktion durch Geraden, d.h. Polynome vom Grad 1, auf den Teilintervallen. Die Approximation des Integralwertes ergibt sich entsprechend aus den Flächeninhalten der so entstandenen Trapeze.</p>
 <p>Wie im vorhergehenden Kapitel wird das Verfahren anhand folgender Funktion demonstriert</p>
 <p><span class="math display">\[ \mathsf{I = \int_0^2\sin(3x) + 2x \ dx} \]</span></p>
-<div id="10ca61b3" class="cell" data-execution_count="12">
+<div id="5f14ec1d" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fkt(x):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(<span class="dv">3</span><span class="op">*</span>x) <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -438,14 +441,14 @@ window.Quarto = {
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>I_exakt <span class="op">=</span> (<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>np.cos(<span class="dv">3</span><span class="op">*</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> (<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Bildung der Stützpunkte:</p>
-<div id="5dc4ff4e" class="cell" data-execution_count="13">
+<div id="676be4e4" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>xi <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span>, n)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>yi <span class="op">=</span> fkt(xi)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Zunächst erfolgt noch die Visualisierung des Verfahrens.</p>
-<div id="2772a910" class="cell" data-execution_count="14">
+<div id="118909ed" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, label<span class="op">=</span><span class="st">'Funktion'</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(xi, yi, label<span class="op">=</span><span class="st">'Stützstellen'</span>, c<span class="op">=</span><span class="st">'C3'</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.plot(xi, yi, label<span class="op">=</span><span class="st">'Approximation'</span>, c<span class="op">=</span><span class="st">'C1'</span>)</span>
@@ -457,13 +460,13 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-15-output-1.png" width="571" height="411" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Die Integration selbst kann mittels der <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.trapezoid.html#scipy.integrate.trapezoid">Funktion <code>scipy.integrate.trapezoid</code></a> ausgeführt werden.</p>
-<div id="aa2e976d" class="cell" data-execution_count="15">
+<div id="4f05b11a" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> scipy.integrate.trapezoid(yi, xi)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Integralwert mit </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> Stützstellen: </span><span class="sc">{</span>res<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -471,7 +474,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Der so ermittelte Wert nähert sich dem exakten Wert mit zunehmender Anzahl der Stützstellen.</p>
-<div id="bcfa388c" class="cell" data-execution_count="16">
+<div id="bfee20ee" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n_max <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ns <span class="op">=</span> np.arange(<span class="dv">2</span>, n_max, <span class="dv">1</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> np.zeros(<span class="bu">len</span>(ns))</span>
@@ -481,7 +484,7 @@ window.Quarto = {
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    yi <span class="op">=</span> fkt(xi)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    tr[i] <span class="op">=</span> scipy.integrate.trapezoid(yi, xi)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4739bea6" class="cell" data-execution_count="17">
+<div id="afa44eb3" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, tr)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>I_exakt, color<span class="op">=</span><span class="st">'C3'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -492,12 +495,12 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-18-output-1.png" width="598" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="a7e22a8d" class="cell" data-execution_count="18">
+<div id="a1a83177" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, np.<span class="bu">abs</span>(tr<span class="op">-</span>I_exakt))</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Anzahl der Stützstellen n'</span>)</span>
@@ -510,7 +513,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-19-output-1.png" width="600" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -520,13 +523,13 @@ window.Quarto = {
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="simpsonregel"><span class="header-section-number">2.3.2</span> Simpsonregel</h3>
 <p>Die Verwendung eines Polynoms vom zweiten Grad führt zur Simpsonregel. Hierzu wird die Funktion an einem Zwischenwert, mittig im Teilintervall, ausgewertet und zusammen mit den Werten an den Stützstellen zur Bestimmung der Polynomkoeffizienten verwendet.</p>
 <p>Anhand des obigen Beispiels wird die Simpsonregel visuell demonstriert.</p>
-<div id="0a93581e" class="cell" data-execution_count="19">
+<div id="78a3b737" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>xi <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span>, n)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>yi <span class="op">=</span> fkt(xi)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="626f853a" class="cell" data-execution_count="20">
+<div id="3b75f1ff" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, label<span class="op">=</span><span class="st">'Funktion'</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(xi, yi, label<span class="op">=</span><span class="st">'Stützstellen'</span>, c<span class="op">=</span><span class="st">'C3'</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -554,13 +557,13 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-21-output-1.png" width="571" height="411" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Die Simpsonregel ist bereits in der <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.simpson.html#scipy.integrate.simpson">Funktion <code>scipy.integrate.simpson</code></a> implementiert. Im Folgenden wird nur die Differenz zur Trapezregel demonstriert.</p>
-<div id="e369713a" class="cell" data-execution_count="21">
+<div id="c5c92842" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n_max <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ns <span class="op">=</span> np.arange(<span class="dv">3</span>, n_max, <span class="dv">2</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>si <span class="op">=</span> np.zeros(<span class="bu">len</span>(ns))</span>
@@ -572,7 +575,7 @@ window.Quarto = {
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    si[i] <span class="op">=</span> scipy.integrate.simpson(yi, xi)</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    tr[i] <span class="op">=</span> scipy.integrate.trapezoid(yi, xi)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="79a65774" class="cell" data-tags="[]" data-execution_count="22">
+<div id="75ec5d72" class="cell" data-tags="[]" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, np.<span class="bu">abs</span>(tr<span class="op">-</span>I_exakt), label<span class="op">=</span><span class="st">'Trapezregel'</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, np.<span class="bu">abs</span>(si<span class="op">-</span>I_exakt), label<span class="op">=</span><span class="st">'Simpsonregel'</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -587,7 +590,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-23-output-1.png" width="600" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -600,7 +603,7 @@ window.Quarto = {
 <p>Für <span class="math inline">\(\mathsf{n \gg 1}\)</span> zufällige Stützstellen <span class="math inline">\(\mathsf{x_i \in [a, b]}\)</span> gilt folgende Näherung</p>
 <p><span class="math display">\[\mathsf{I = \int_a^b f(x)\ dx \approx \frac{b-a}{n}\sum_{i=1}^n f(x_i)} \]</span></p>
 <p>Für das Beispiel aus den vorhergehenden Kapiteln gilt</p>
-<div id="a276dc4c" class="cell" data-execution_count="24">
+<div id="b362b8bd" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fkt(x):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin(<span class="dv">3</span><span class="op">*</span>x) <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -611,17 +614,17 @@ window.Quarto = {
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Exakte Lösung</span></span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>I_exakt <span class="op">=</span> (<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span><span class="op">*</span>np.cos(<span class="dv">3</span><span class="op">*</span><span class="dv">2</span>) <span class="op">+</span> <span class="dv">2</span><span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> (<span class="op">-</span><span class="dv">1</span><span class="op">/</span><span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b4b8fa8e" class="cell" data-execution_count="25">
+<div id="34983944" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2000</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>xi <span class="op">=</span> np.random.random(n) <span class="op">*</span> <span class="dv">2</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>yi <span class="op">=</span> fkt(xi)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span>n <span class="op">*</span> np.<span class="bu">sum</span>(yi)</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Integralwert für </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> Stützstellen: </span><span class="sc">{</span>I<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Integralwert für 2000 Stützstellen: 4.0216</code></pre>
+<pre><code>Integralwert für 2000 Stützstellen: 4.0325</code></pre>
 </div>
 </div>
-<div id="1969539d" class="cell" data-execution_count="26">
+<div id="acd03eaa" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>n_max <span class="op">=</span> <span class="dv">50000</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dn <span class="op">=</span> <span class="dv">250</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ns <span class="op">=</span> np.arange(dn, n_max, dn, dtype<span class="op">=</span><span class="bu">int</span>)</span>
@@ -634,7 +637,7 @@ window.Quarto = {
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    yi <span class="op">=</span> fkt(xi[:n])</span>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    mc[i] <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span>n <span class="op">*</span> np.<span class="bu">sum</span>(yi)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0576d821" class="cell" data-execution_count="27">
+<div id="b11e19ee" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, np.<span class="bu">abs</span>(mc<span class="op">-</span>I_exakt))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Anzahl der Stützstellen n'</span>)</span>
@@ -647,15 +650,15 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-28-output-1.png" width="600" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Alternativ kann auch das Flächenverhältnis zwischen der zu integrierenden Funktion und einer Referenzfläche <span class="math inline">\(\mathsf{A_r}\)</span> gebildet werden. Hierzu werden <span class="math inline">\(\mathsf{n}\)</span> Zufallszahlenpaare <span class="math inline">\(\mathsf{(x_i, y_i)}\)</span> generiert und gezählt wieviele davon in der gesuchten Fläche liegen. Die Annahme ist, dass sich beide Verhältnisse für große <span class="math inline">\(\mathsf{n}\)</span> annähern. Im einfachsten Fall, wenn <span class="math inline">\(\mathsf{f(x) \ge 0}\)</span>, gilt folgende Abschätzung</p>
+<p>Alternativ kann auch das Flächenverhältnis zwischen der zu integrierenden Funktion und einer Referenzfläche <span class="math inline">\(\mathsf{A_r}\)</span> gebildet werden. Hierzu werden <span class="math inline">\(\mathsf{n}\)</span> Zufallszahlenpaare <span class="math inline">\(\mathsf{(x_i, y_i)}\)</span> generiert und gezählt wie viele davon in der gesuchten Fläche liegen. Die Annahme ist, dass sich beide Verhältnisse für große <span class="math inline">\(\mathsf{n}\)</span> annähern. Im einfachsten Fall, wenn <span class="math inline">\(\mathsf{f(x) \ge 0}\)</span>, gilt folgende Abschätzung</p>
 <p><span class="math display">\[\mathsf {I \approx \frac{A_r \cdot \left|\left\{y_i \ |\  y_i &lt; f(x_i)\right\}\right|}{n}} \]</span></p>
 <p>Im obigen Beispiel kann die Fläche <span class="math inline">\(\mathsf{[0, 2] \times [0, 4] = 8}\)</span> als Referenzfläche verwendet werden.</p>
-<div id="51836950" class="cell" data-execution_count="28">
+<div id="d11219d2" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2000</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>xi <span class="op">=</span> np.random.random(n) <span class="op">*</span> <span class="dv">2</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>yi <span class="op">=</span> np.random.random(n) <span class="op">*</span> <span class="dv">4</span></span>
@@ -665,10 +668,10 @@ window.Quarto = {
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> z <span class="op">/</span> n <span class="op">*</span> <span class="dv">8</span></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Integralwert für </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> Stützstellen: </span><span class="sc">{</span>I<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Integralwert für 2000 Stützstellen: 3.984</code></pre>
+<pre><code>Integralwert für 2000 Stützstellen: 4.084</code></pre>
 </div>
 </div>
-<div id="2c96fd8b" class="cell" data-execution_count="29">
+<div id="97238f85" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>n_max <span class="op">=</span> <span class="dv">50000</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dn <span class="op">=</span> <span class="dv">250</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ns <span class="op">=</span> np.arange(dn, n_max, dn, dtype<span class="op">=</span><span class="bu">int</span>)</span>
@@ -683,7 +686,7 @@ window.Quarto = {
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.<span class="bu">sum</span>(yi[:n] <span class="op">&lt;</span> fkt(xi[:n]))</span>
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    mc[i] <span class="op">=</span> z <span class="op">/</span> n <span class="op">*</span> <span class="dv">8</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4b601dd6" class="cell" data-execution_count="30">
+<div id="35622719" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.plot(ns, np.<span class="bu">abs</span>(mc<span class="op">-</span>I_exakt))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Anzahl der Stützstellen n'</span>)</span>
@@ -696,7 +699,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_integrale_files/figure-html/cell-31-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="intro_integrale_files/figure-html/cell-31-output-1.png" width="600" height="431" class="figure-img"></p>
 </figure>
 </div>
 </div>
