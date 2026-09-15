@@ -74,7 +74,7 @@ plt.grid();
 Alternativ kann auch das Flächenverhältnis zwischen der zu integrierenden 
 Funktion und einer Referenzfläche $\mathsf{A_r}$ gebildet werden. Hierzu 
 werden $\mathsf{n}$ Zufallszahlenpaare $\mathsf{(x_i, y_i)}$ generiert und 
-gezählt wieviele davon in der gesuchten Fläche liegen. Die Annahme ist, dass 
+gezählt wie viele davon in der gesuchten Fläche liegen. Die Annahme ist, dass
 sich beide Verhältnisse für große $\mathsf{n}$ annähern. Im einfachsten Fall, 
 wenn $\mathsf{f(x) \ge 0}$, gilt folgende Abschätzung
 
