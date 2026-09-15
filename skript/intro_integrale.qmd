@@ -4,7 +4,7 @@ Die Bildung von Integralen findet beispielsweise bei der Bestimmung von Flächen
 
 $$ \mathsf{I = \int_a^b f(x)\ dx} $$
 
-Im Allgemeinen kann das Integral nicht analytisch gelöst werden, da die Stammfunktion $\mathsf{F(x)}$ nicht leicht zu bestimmen ist. In solchen Fällen können numersiche Verfahren eingesetzt werden um den Integralwert zu approximieren. Die numerische Integration wird oft auch als numersiche Quadratur bezeichnet.
+Im Allgemeinen kann das Integral nicht analytisch gelöst werden, da die Stammfunktion $\mathsf{F(x)}$ nicht leicht zu bestimmen ist. In solchen Fällen können numerische Verfahren eingesetzt werden um den Integralwert zu approximieren. Die numerische Integration wird oft auch als numerische Quadratur bezeichnet.
 
 Dieses Kapitel bietet eine kurze Übersicht von numerischen Integrationsmethoden: 
 
