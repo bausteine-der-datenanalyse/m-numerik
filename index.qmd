@@ -9,7 +9,7 @@ Bausteine Computergestützter Datenanalyse. "Numerik" von Lukas Arnold,
 Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch und 
 Sebastian Seipel ist lizensiert unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de). 
 Das Werk ist abrufbar unter <https://github.com/bausteine-der-datenanalyse/m-numerik>. 
-Ausgenommen von der Lizenz sind alle Logos und anders gekennzeichneten Inhalte. 2024
+Ausgenommen von der Lizenz sind alle Logos und anders gekennzeichneten Inhalte. 2026
 
 :::
 
